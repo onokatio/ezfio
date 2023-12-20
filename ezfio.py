@@ -1029,24 +1029,6 @@ def DefineTests():
                 '256', False, '', 'Sequential Preconditioning Pass 2',
                 lambda o: {SequentialConditioning()})
 
-    testname = "Sustained Multi-Threaded Sequential Read Tests by Block Size"
-    seqrand = "Seq"
-    wmix = 0
-    threads = 1
-    runtime = shorttime
-    iops_log = False
-    iodepth = 256
-    AddTestBSShmoo()
-
-    testname = "Sustained Multi-Threaded Random Read Tests by Block Size"
-    seqrand = "Rand"
-    wmix = 0
-    threads = 16
-    runtime = shorttime
-    iops_log = False
-    iodepth = 16
-    AddTestBSShmoo()
-
     testname = "Sequential Write Tests with Queue Depth=1 by Block Size"
     seqrand = "Seq"
     wmix = 100
@@ -1055,66 +1037,6 @@ def DefineTests():
     iops_log = False
     iodepth = 1
     AddTestBSShmoo()
-
-    if not fastPrecond:
-        AddTest('Random Preconditioning', 'Preparation', '', '', '', '', '', '',
-                '', lambda o: {})  # Only for display on-screen
-        AddTest('Random Preconditioning', 'Rand Pass 1', '100', '4096', '1',
-                '256', False, '', 'Random Preconditioning',
-                lambda o: {RandomConditioning()})
-        AddTest('Random Preconditioning', 'Rand Pass 2', '100', '4096', '1',
-                '256', False, '', 'Random Preconditioning',
-                lambda o: {RandomConditioning()})
-
-    testname = "Sustained 4KB Random Read Tests by Number of Threads"
-    seqrand = "Rand"
-    wmix = 0
-    bs = 4096
-    runtime = shorttime
-    iops_log = False
-    iodepth = 1
-    AddTestThreadsShmoo()
-
-    testname = "Sustained 4KB Random mixed 30% Write Tests by Threads"
-    seqrand = "Rand"
-    wmix = 30
-    bs = 4096
-    runtime = shorttime
-    iops_log = False
-    iodepth = 1
-    AddTestThreadsShmoo()
-
-    testname = "Sustained Perf Stability Test - 4KB Random 30% Write"
-    AddTest(testname, 'Preparation', '', '', '', '', '', '', '',
-            lambda o: {AppendFile(o['name'], testcsv)})
-    seqrand = "Rand"
-    wmix = 30
-    bs = 4096
-    runtime = longtime
-    iops_log = True
-    iodepth = 1
-    threads = 256
-    DoAddTest(testname, seqrand, wmix, bs, threads, iodepth, testname,
-              iops_log, runtime)
-
-    testname = "Sustained 4KB Random Write Tests by Number of Threads"
-    seqrand = "Rand"
-    wmix = 100
-    bs = 4096
-    runtime = shorttime
-    iops_log = False
-    iodepth = 1
-    AddTestThreadsShmoo()
-
-    testname = "Sustained Multi-Threaded Random Write Tests by Block Size"
-    seqrand = "Rand"
-    wmix = 100
-    runtime = shorttime
-    iops_log = False
-    iodepth = 16
-    threads = 16
-    AddTestBSShmoo()
-
 
 def RunAllTests():
     """Iterate through the OC work queue and run each job, show progress."""
