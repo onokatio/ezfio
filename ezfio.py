@@ -403,7 +403,8 @@ def SetupFiles():
     global timeseriesslatcsv
 
     # Datestamp for run output files
-    ds = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    if ds == "":
+        ds = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     # The unique suffix we generate for all output files
     suffix = str(physDriveGB) + "GB_" + str(cpuCores) + "cores_"

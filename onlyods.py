@@ -33,6 +33,7 @@ if __name__ == "__main__":
     ezfio.CollectSystemInfo()
     ezfio.CollectDriveInfo()
     ezfio.VerifyContinue()
+    ezfio.ds = "2024-01-10_08-31-04"
     ezfio.SetupFiles()
     ezfio.GenerateResultODS()
 
