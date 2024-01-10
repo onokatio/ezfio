@@ -454,7 +454,7 @@ def SetupFiles():
     if not os.path.exists(odssrc):
         print("ERROR: Can't find original ODS spreadsheet '" + odssrc + "'.")
         sys.exit(1)
-    odsdest = outputDest + "/ezfio_results_"+suffix+".ods"
+    odsdest = outputDest + "/ezfio_results_"+details+".ods"
     #if os.path.exists(odsdest):
     #    os.unlink(odsdest)
 
