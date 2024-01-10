@@ -414,8 +414,7 @@ def SetupFiles():
     if not outputDest:
         outputDest = os.getcwd()
     # The "details" directory contains the raw output of each FIO run
-    if details == "":
-        details = outputDest + "/details_" + suffix
+    details = outputDest + "/details_" + suffix
     #if os.path.exists(details):
     #    shutil.rmtree(details)
     if not os.path.exists(details):
