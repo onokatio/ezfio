@@ -1021,7 +1021,8 @@ def DefineTests():
 
     AddTest('Sequential Preconditioning', 'Preparation', '', '', '', '', '',
             '', '', lambda o: {})  # Only for display on-screen
-    AddTest('Sequential Preconditioning', 'Seq Pass 1', '100', '131072', '1',
+    if not fastPrecond:
+        AddTest('Sequential Preconditioning', 'Seq Pass 1', '100', '131072', '1',
             '256', False, '', 'Sequential Preconditioning Pass 1',
             lambda o: {SequentialConditioning()})
     if not fastPrecond:
