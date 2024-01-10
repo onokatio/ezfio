@@ -25,6 +25,7 @@ import ezfio
 if __name__ == "__main__":
     ezfio.ParseArgs()
     ezfio.CheckAdmin()
+    global fio
     fio = ezfio.FindFIO()
     ezfio.CheckFIOVersion()
     ezfio.CheckAIOLimits()
