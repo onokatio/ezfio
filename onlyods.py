@@ -23,6 +23,7 @@ from ezfio import *
 
 if __name__ == "__main__":
     ParseArgs()
+    fio = FindFIO()
     CheckFIOVersion()
     CheckAIOLimits()
     CollectSystemInfo()
