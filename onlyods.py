@@ -22,11 +22,12 @@ import zipfile
 # from ezfio import *
 import ezfio
 
+fio = ""
+
 if __name__ == "__main__":
     ezfio.ParseArgs()
     ezfio.CheckAdmin()
-    global fio
-    fio = ezfio.FindFIO()
+    ezfio.fio = ezfio.FindFIO()
     ezfio.CheckFIOVersion()
     ezfio.CheckAIOLimits()
     ezfio.CollectSystemInfo()
