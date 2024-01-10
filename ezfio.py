@@ -418,7 +418,8 @@ def SetupFiles():
         details = outputDest + "/details_" + suffix
     #if os.path.exists(details):
     #    shutil.rmtree(details)
-    os.makedirs(details)
+    if not os.path.exists(details):
+        os.makedirs(details)
     # Copy this script into it for posterity
     shutil.copyfile(__file__, details + "/" + os.path.basename(__file__))
 

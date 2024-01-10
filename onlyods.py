@@ -32,7 +32,6 @@ if __name__ == "__main__":
     ezfio.CheckAIOLimits()
     ezfio.CollectSystemInfo()
     ezfio.CollectDriveInfo()
-    ezfio.VerifyContinue()
     ezfio.details = ""
     ezfio.SetupFiles()
     ezfio.GenerateResultODS()
