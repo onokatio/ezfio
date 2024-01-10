@@ -19,16 +19,16 @@ import tempfile
 import threading
 import time
 import zipfile
-import ezfio
+from ezfio import *
 
 if __name__ == "__main__":
-    ezfio.ParseArgs()
-    ezfio.CheckFIOVersion()
-    ezfio.CheckAIOLimits()
-    ezfio.CollectSystemInfo()
-    ezfio.CollectDriveInfo()
-    ezfio.VerifyContinue()
-    ezfio.SetupFiles()
-    ezfio.GenerateResultODS()
+    ParseArgs()
+    CheckFIOVersion()
+    CheckAIOLimits()
+    CollectSystemInfo()
+    CollectDriveInfo()
+    VerifyContinue()
+    SetupFiles()
+    GenerateResultODS()
 
     print("\nCOMPLETED!\nSpreadsheet file: ")
