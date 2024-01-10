@@ -414,9 +414,10 @@ def SetupFiles():
     if not outputDest:
         outputDest = os.getcwd()
     # The "details" directory contains the raw output of each FIO run
-    details = outputDest + "/details_" + suffix
-    if os.path.exists(details):
-        shutil.rmtree(details)
+    if details == "":
+        details = outputDest + "/details_" + suffix
+    #if os.path.exists(details):
+    #    shutil.rmtree(details)
     os.makedirs(details)
     # Copy this script into it for posterity
     shutil.copyfile(__file__, details + "/" + os.path.basename(__file__))
@@ -424,29 +425,28 @@ def SetupFiles():
     # Files we're going to generate, encode some system info in the names
     # If the output files already exist, erase them
     testcsv = details + "/ezfio_tests_"+suffix+".csv"
-    if os.path.exists(testcsv):
-        os.unlink(testcsv)
-    CSVInfoHeader(testcsv)
-    AppendFile("Type,Write %,Block Size,Threads,Queue Depth/Thread,IOPS," +
+    if not os.path.exists(testcsv):
+        CSVInfoHeader(testcsv)
+        AppendFile("Type,Write %,Block Size,Threads,Queue Depth/Thread,IOPS," +
                "Bandwidth (MB/s),Read Latency (us),Write Latency (us)," +
                "System CPU,User CPU", testcsv)
     timeseriescsv = details + "/ezfio_timeseries_"+suffix+".csv"
     timeseriesclatcsv = details + "/ezfio_timeseriesclat_"+suffix+".csv"
     timeseriesslatcsv = details + "/ezfio_timeseriesslat_"+suffix+".csv"
     for f in [timeseriescsv, timeseriesclatcsv, timeseriesslatcsv]:
-        if os.path.exists(f):
-            os.unlink(f)
-        CSVInfoHeader(f)
-    AppendFile(",".join(["IOPS"] + list(physDriveDict.keys())),
+        if not os.path.exists(f):
+            CSVInfoHeader(f)
+    if not os.path.exists(timeseriescsv):
+        AppendFile(",".join(["IOPS"] + list(physDriveDict.keys())),
                timeseriescsv)  # Add IOPS header
-    hdr = ""
-    for host in physDriveDict.keys():
-        hdr = hdr + ',' + host + "-read"
-        hdr = hdr + ',' + host + "-write"
-    AppendFile('CLAT-read,CLAT-write' + hdr,
-               timeseriesclatcsv)  # Add IOPS header
-    AppendFile('SLAT-read,SLAT-write' + hdr,
-               timeseriesslatcsv)  # Add IOPS header
+        hdr = ""
+        for host in physDriveDict.keys():
+            hdr = hdr + ',' + host + "-read"
+            hdr = hdr + ',' + host + "-write"
+        AppendFile('CLAT-read,CLAT-write' + hdr,
+                   timeseriesclatcsv)  # Add IOPS header
+        AppendFile('SLAT-read,SLAT-write' + hdr,
+                   timeseriesslatcsv)  # Add IOPS header
 
     # ODS input and output files
     odssrc = os.path.dirname(os.path.realpath(__file__)) + "/original.ods"
@@ -454,8 +454,8 @@ def SetupFiles():
         print("ERROR: Can't find original ODS spreadsheet '" + odssrc + "'.")
         sys.exit(1)
     odsdest = outputDest + "/ezfio_results_"+suffix+".ods"
-    if os.path.exists(odsdest):
-        os.unlink(odsdest)
+    #if os.path.exists(odsdest):
+    #    os.unlink(odsdest)
 
 
 class FIOError(Exception):
