@@ -414,7 +414,7 @@ def SetupFiles():
         outputDest = os.getcwd()
     # The "details" directory contains the raw output of each FIO run
     details = outputDest + "/details_" + suffix
-    os.makedirs(details, exists_ok=True)
+    os.makedirs(details, exist_ok=True)
     # Copy this script into it for posterity
     shutil.copyfile(__file__, details + "/" + os.path.basename(__file__))
 
