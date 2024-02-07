@@ -403,8 +403,7 @@ def SetupFiles():
     global timeseriesslatcsv
 
     # Datestamp for run output files
-    if ds == "":
-        ds = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    ds = ds or datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     # The unique suffix we generate for all output files
     suffix = str(physDriveGB) + "GB_" + str(cpuCores) + "cores_"
@@ -1016,8 +1015,7 @@ def DefineTests():
 
     AddTest('Sequential Preconditioning', 'Preparation', '', '', '', '', '',
             '', '', lambda o: {})  # Only for display on-screen
-    if not fastPrecond:
-        AddTest('Sequential Preconditioning', 'Seq Pass 1', '100', '131072', '1',
+    AddTest('Sequential Preconditioning', 'Seq Pass 1', '100', '131072', '1',
             '256', False, '', 'Sequential Preconditioning Pass 1',
             lambda o: {SequentialConditioning()})
     if not fastPrecond:
