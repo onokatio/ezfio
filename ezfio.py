@@ -415,10 +415,7 @@ def SetupFiles():
         outputDest = os.getcwd()
     # The "details" directory contains the raw output of each FIO run
     details = outputDest + "/details_" + suffix
-    #if os.path.exists(details):
-    #    shutil.rmtree(details)
-    if not os.path.exists(details):
-        os.makedirs(details)
+    os.makedirs(details, exists_ok=True)
     # Copy this script into it for posterity
     shutil.copyfile(__file__, details + "/" + os.path.basename(__file__))
 
@@ -454,9 +451,6 @@ def SetupFiles():
         print("ERROR: Can't find original ODS spreadsheet '" + odssrc + "'.")
         sys.exit(1)
     odsdest = outputDest + "/ezfio_results_"+suffix+".ods"
-    #if os.path.exists(odsdest):
-    #    os.unlink(odsdest)
-
 
 class FIOError(Exception):
     """Exception generated when FIO returns a non-success value
